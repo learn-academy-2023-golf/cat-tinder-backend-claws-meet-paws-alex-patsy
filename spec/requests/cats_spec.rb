@@ -99,5 +99,72 @@ RSpec.describe "Cats", type: :request do
     end
   end
 
+  describe " Name validation" do
+  it 'denies the creation of a cat without a name' do
+    cat_params = {
+      cat: {
+        age: 1, 
+        enjoys: 'Climbing trees', 
+        image: 'https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=0.670xw:1.00xh;0.167xw,0&resize=640:*' 
+      }
+    }
+
+    post '/cats', params: cat_params
+    expect(response.status).to eq 422
+    json = JSON.parse(response.body)
+    expect(json['name']).to include "can't be blank"
+    end
+  end
+
+  describe "Age validation" do
+    it 'denies the creation of a cat without an age' do
+      cat_params = {
+        cat: {
+          name: 'Bob', 
+          enjoys: 'Climbing trees', 
+          image: 'https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=0.670xw:1.00xh;0.167xw,0&resize=640:*' 
+        }
+      }
+  
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['age']).to include "can't be blank"
+    end
+  end
+
+  describe "Enjoys validation" do
+    it 'denies the creation of a cat without an enjoys' do
+      cat_params = {
+        cat: {
+          name: 'Bob', 
+          age: 1, 
+          image: 'https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=0.670xw:1.00xh;0.167xw,0&resize=640:*' 
+        }
+      }
+  
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['enjoys']).to include "can't be blank"
+    end
+  end
+
+  describe "Image validation" do
+    it 'denies the creation of a cat without an image' do
+      cat_params = {
+        cat: {
+          name: 'Bob', 
+          age: 1, 
+          enjoys: 'Climbing trees'
+        }
+      }
+  
+      post '/cats', params: cat_params
+      expect(response.status).to eq 422
+      json = JSON.parse(response.body)
+      expect(json['image']).to include "can't be blank"
+    end
+  end
 end
 
