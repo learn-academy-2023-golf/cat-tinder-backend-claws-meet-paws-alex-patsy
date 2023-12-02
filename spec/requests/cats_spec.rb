@@ -100,7 +100,7 @@ RSpec.describe "Cats", type: :request do
   end
 
   describe " Name validation" do
-  it 'denies the creation of a cat without a name' do
+    it 'denies the creation of a cat without a name' do
     cat_params = {
       cat: {
         age: 1, 
