@@ -20,7 +20,8 @@ cats = [
     {
         name: 'Mike',
         age: 8, 
-        enjoys: 'Food' 
+        enjoys: 'Food',
+        image: 'https://img1.cgtrader.com/items/2493637/d6b885cbd1/large/mike-cat-3d-model-low-poly-animated-obj.jpg'
     }
     
 ]
